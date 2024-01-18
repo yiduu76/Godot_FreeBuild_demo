@@ -1,0 +1,124 @@
+[gd_scene load_steps=13 format=3 uid="uid://s8wlj7yysady"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Ey_8/scripts/Ey_Triangel_8.tres.gd" id="1_dsw2y"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="2_gqwjy"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="3_x42wp"]
+[ext_resource type="Script" path="res://Tscn/Enemy/Scripts/MyClasses/StateMachine.gd" id="4_43xxh"]
+[ext_resource type="Script" path="res://Tscn/Enemy/Ey_8/scripts/state/move_forword.gd" id="5_vpbh2"]
+[ext_resource type="Script" path="res://Tscn/Enemy/Ey_8/scripts/state/trace.gd" id="6_7g6qi"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_8xmu0"]
+friction = 0.0
+bounce = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5mvce"]
+resource_local_to_scene = true
+shader = ExtResource("2_gqwjy")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="Animation" id="Animation_ts7ol"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_2sl1t"]
+resource_name = "hitted"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.3, 0.8), Vector2(1, 1), Vector2(0.8, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_x5uoe"]
+resource_name = "move_forword"
+length = 0.2
+step = 0.0166667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:speed")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [8.0, 8.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y0tk5"]
+_data = {
+"RESET": SubResource("Animation_ts7ol"),
+"hitted": SubResource("Animation_2sl1t"),
+"move_forword": SubResource("Animation_x5uoe")
+}
+
+[node name="Re_Ey_Triangel_8" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+physics_material_override = SubResource("PhysicsMaterial_8xmu0")
+max_contacts_reported = 2
+contact_monitor = true
+can_sleep = false
+script = ExtResource("1_dsw2y")
+shape_type = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5mvce")
+position = Vector2(0.0078125, -0.00781256)
+rotation = 0.785398
+texture = ExtResource("3_x42wp")
+offset = Vector2(-1.41421, 1.42526)
+region_enabled = true
+region_rect = Rect2(0, 64, 9, 9)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_y0tk5")
+}
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -6, -2, 6, 4, 0)
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("4_43xxh")
+
+[node name="move_forword" type="Node" parent="StateMachine"]
+script = ExtResource("5_vpbh2")
+
+[node name="trace" type="Node" parent="StateMachine"]
+script = ExtResource("6_7g6qi")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

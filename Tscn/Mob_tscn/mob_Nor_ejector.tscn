@@ -1,0 +1,165 @@
+[gd_scene load_steps=18 format=3 uid="uid://ejmd7x0aw32c"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://kp22o007ueu1" path="res://Tres/nor_physics_material.tres" id="1_wgl4f"]
+[ext_resource type="Script" path="res://Tscn/Mob_tscn/scripts/mob_ejector.gd" id="2_0kxlc"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="3_4jsgi"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="4_v66wm"]
+[ext_resource type="Script" path="res://Tscn/Particles_tscn/ejector_particles_2d.gd" id="5_020d4"]
+
+[sub_resource type="Shader" id="Shader_ahjjp"]
+code = "shader_type canvas_item;
+
+uniform int num_colors: hint_range(4, 8, 1) = 4;
+uniform float precision : hint_range(0.0, 1.0, 0.1) = 0.1;
+
+uniform sampler2D palette_in;
+uniform sampler2D palette_out;
+
+vec4 swap_color(vec4 color) {
+	float inc = 1.0 / float(num_colors); 
+	for (float i = 0.0; i < 1.0; i += inc) {
+		vec2 uv = vec2(i, 0.0);
+		vec4 color_in = texture(palette_in, uv);
+		if (distance(color, color_in) <= precision) {
+			return texture(palette_out, uv);
+		}
+	}
+	return color;
+}
+void fragment() {
+	vec4 color = texture(TEXTURE, UV);
+	COLOR = swap_color(color);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_y2lkr"]
+shader = SubResource("Shader_ahjjp")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_daebw"]
+radius = 4.12311
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3emqk"]
+resource_local_to_scene = true
+shader = ExtResource("3_4jsgi")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="Animation" id="Animation_o08h5"]
+resource_name = "hitted"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.3), Vector2(1, 1), Vector2(1.3, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8ktnm"]
+resource_name = "move_forword"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m3wxj"]
+_data = {
+"hitted": SubResource("Animation_o08h5"),
+"move_forword": SubResource("Animation_8ktnm")
+}
+
+[sub_resource type="Gradient" id="Gradient_uqhvp"]
+colors = PackedColorArray(0.517184, 0.517184, 0.517184, 1, 0.45098, 0.45098, 0.45098, 0.478431)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_53aum"]
+gradient = SubResource("Gradient_uqhvp")
+
+[sub_resource type="Curve" id="Curve_6se6t"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_h57tu"]
+curve = SubResource("Curve_6se6t")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_6h2ux"]
+lifetime_randomness = 0.3
+emission_shape = 3
+emission_box_extents = Vector3(0, 2, 1)
+particle_flag_disable_z = true
+direction = Vector3(-1, 0, 0)
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.7
+scale_max = 1.4
+scale_curve = SubResource("CurveTexture_h57tu")
+color_ramp = SubResource("GradientTexture1D_53aum")
+
+[node name="mob_Nor_ejector" type="RigidBody2D"]
+material = SubResource("ShaderMaterial_y2lkr")
+collision_layer = 0
+collision_mask = 0
+physics_material_override = ExtResource("1_wgl4f")
+can_sleep = false
+script = ExtResource("2_0kxlc")
+CN_name = "推进器部件"
+shape_type = 4
+
+[node name="PinJoint2D1" type="PinJoint2D" parent="."]
+disable_collision = false
+softness = 1.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." groups=["ejector"]]
+polygon = PackedVector2Array(-4, -4, 4, -4, 4, 4, -4, 4)
+
+[node name="Marker2D" type="Marker2D" parent="CollisionPolygon2D"]
+
+[node name="detect_area" type="Area2D" parent="." groups=["detect_area"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="detect_area"]
+shape = SubResource("CircleShape2D_daebw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_3emqk")
+texture = ExtResource("4_v66wm")
+region_enabled = true
+region_rect = Rect2(16, 32, 9, 9)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m3wxj")
+}
+
+[node name="ejectorParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-3, 0)
+amount = 1
+process_material = SubResource("ParticleProcessMaterial_6h2ux")
+lifetime = 0.5
+randomness = 0.3
+script = ExtResource("5_020d4")
+
+[node name="Marker2D1" type="Marker2D" parent="ejectorParticles2D"]
+position = Vector2(8, 0)
+
+[node name="Marker2D2" type="Marker2D" parent="ejectorParticles2D"]
+position = Vector2(-8, 0)

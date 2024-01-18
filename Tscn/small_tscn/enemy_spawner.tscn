@@ -1,0 +1,122 @@
+[gd_scene load_steps=21 format=3 uid="uid://74jokjvs5is8"]
+
+[ext_resource type="Script" path="res://Tscn/small_tscn/scripts/Enemy_spawner.gd" id="1_cs743"]
+[ext_resource type="Texture2D" uid="uid://ivv7425jvavh" path="res://PNG/VFX/Enenmy_spawn_notice.png" id="2_kdc7y"]
+[ext_resource type="PackedScene" uid="uid://covk7dwnd41jj" path="res://Tscn/Enemy/Ey_16/Ey_Triangel_16.tscn" id="3_o0u7w"]
+[ext_resource type="PackedScene" uid="uid://vhm3ue4qjqsg" path="res://Tscn/Enemy/Ey_16/Ey_Quar_16.tscn" id="4_odath"]
+[ext_resource type="PackedScene" uid="uid://tm05u8jq2jww" path="res://Tscn/Enemy/Ey_16/Ey_Circle_16.tscn" id="4_wap7t"]
+[ext_resource type="PackedScene" uid="uid://b834ycph8hgm1" path="res://Tscn/Enemy/Ey_16/Ey_Rect_16.tscn" id="5_fyqld"]
+[ext_resource type="PackedScene" uid="uid://bbw8jrtovkg7d" path="res://Tscn/Enemy/Ey_8/Ey_Rect_8.tscn" id="5_li4dw"]
+[ext_resource type="PackedScene" uid="uid://b737xsx6phgug" path="res://Tscn/Enemy/Ey_8/Ey_Circle_8.tscn" id="6_bhlu5"]
+[ext_resource type="PackedScene" uid="uid://crwdnke4xiyqp" path="res://Tscn/Enemy/Ey_8/Ey_Triangel_8.tscn" id="7_rrxj6"]
+[ext_resource type="PackedScene" uid="uid://cd4k7ru4tearn" path="res://Tscn/Enemy/Ey_8/Ey_Quar_8.tscn" id="8_dwiq0"]
+[ext_resource type="PackedScene" uid="uid://bgjs4bkaw4gmx" path="res://Tscn/Enemy/Ey_8_add/Ey_RC.tscn" id="10_6lwgu"]
+[ext_resource type="PackedScene" uid="uid://b7bqnpl0vpti2" path="res://Tscn/Enemy/Ey_8_add/Ey_RQ.tscn" id="11_stqhs"]
+[ext_resource type="PackedScene" uid="uid://d2fquug5ci6uh" path="res://Tscn/Enemy/Ey_8_add/Ey_RT.tscn" id="12_bromy"]
+[ext_resource type="PackedScene" uid="uid://i4jkhhrk1ime" path="res://Tscn/Enemy/Ey_8_add/Ey_TC.tscn" id="13_riqsf"]
+[ext_resource type="PackedScene" uid="uid://cmun5wt815o3n" path="res://Tscn/Enemy/Ey_8_add/Ey_TQ.tscn" id="14_4hvfx"]
+[ext_resource type="PackedScene" uid="uid://cinsd1sl4d2li" path="res://Tscn/Enemy/Ey_8_add/Ey_R4C.tscn" id="15_sidao"]
+[ext_resource type="PackedScene" uid="uid://ds77306keyu4d" path="res://Tscn/Enemy/Ey_8_add/Ey_R4Q.tscn" id="16_vg84p"]
+
+[sub_resource type="Animation" id="Animation_enyij"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("notice:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("notice:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_yh476"]
+resource_name = "play"
+length = 2.0
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("notice:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(2, 2), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("notice:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.5, 0.5, 1), Color(1, 1, 1, 1), Color(1, 0.5, 0.5, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e8q65"]
+_data = {
+"RESET": SubResource("Animation_enyij"),
+"play": SubResource("Animation_yh476")
+}
+
+[node name="Enemy_spawner" type="Marker2D"]
+script = ExtResource("1_cs743")
+is_random = false
+spawn_num = 1
+Ey_16_1 = ExtResource("3_o0u7w")
+Ey_16_2 = ExtResource("4_odath")
+Ey_16_3 = ExtResource("4_wap7t")
+Ey_16_4 = ExtResource("5_fyqld")
+Ey_8_1 = ExtResource("7_rrxj6")
+Ey_8_2 = ExtResource("8_dwiq0")
+Ey_8_3 = ExtResource("6_bhlu5")
+Ey_8_4 = ExtResource("5_li4dw")
+Ey_8_add_1 = ExtResource("10_6lwgu")
+Ey_8_add_2 = ExtResource("11_stqhs")
+Ey_8_add_3 = ExtResource("12_bromy")
+Ey_8_add_4 = ExtResource("13_riqsf")
+Ey_8_add_5 = ExtResource("14_4hvfx")
+Ey_8_add_6 = ExtResource("15_sidao")
+Ey_8_add_7 = ExtResource("16_vg84p")
+
+[node name="notice" type="Sprite2D" parent="."]
+texture = ExtResource("2_kdc7y")
+offset = Vector2(-0.5, 0.5)
+hframes = 2
+vframes = 2
+frame = 1
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "play"
+libraries = {
+"": SubResource("AnimationLibrary_e8q65")
+}
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

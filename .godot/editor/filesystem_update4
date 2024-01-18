@@ -1,0 +1,16 @@
+res://default_bus_layout.tres
+res://Tscn/dev_.tscn
+res://Tres/shader/pattle_swap.gdshader
+res://Tres/shader/animation_swap_color.tres
+res://Tscn/Enemy/Ey_8/scripts/Ey_Triangel_8.tres.gd
+res://Tres/nor_environment.tres
+res://Tres/ui_style.tres
+res://Tres/mob_empty_shader.tres
+res://Tres/ui_hover_style.tres
+res://Tscn/Shader/mirror.gdshader
+res://Tscn/Shader/8_Color_ColorSwap.gdshader
+res://Tscn/Shader/wave_par.gdshader
+res://Tscn/Shader/Dotted Circle.gdshader
+res://Tres/shader/flash_white.gdshader
+res://Tscn/UI_scn/ui_canvas.tscn
+res://Tscn/UI_scn/reward.tscn

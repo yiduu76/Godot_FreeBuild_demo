@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://c5aw2q1nkmfux"]
+
+[ext_resource type="PhysicsMaterial" uid="uid://kp22o007ueu1" path="res://Tres/nor_physics_material.tres" id="1_vdhuf"]
+[ext_resource type="Script" path="res://Tscn/Bullets/bullet.gd" id="2_bemmk"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="3_s75eb"]
+[ext_resource type="PackedScene" uid="uid://8f2pfxu4qs0l" path="res://Tscn/small_tscn/line_path.tscn" id="4_is101"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="4_lbw1h"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8wlai"]
+resource_local_to_scene = true
+shader = ExtResource("3_s75eb")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bxorf"]
+size = Vector2(1, 1)
+
+[sub_resource type="Animation" id="Animation_l1hoo"]
+resource_name = "hitted"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.3), Vector2(1, 1), Vector2(1.3, 0.8), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0lyhl"]
+_data = {
+"hitted": SubResource("Animation_l1hoo")
+}
+
+[node name="O_1_bullet" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 4
+mass = 0.01
+physics_material_override = ExtResource("1_vdhuf")
+gravity_scale = 0.0
+continuous_cd = 1
+max_contacts_reported = 1
+contact_monitor = true
+lock_rotation = true
+script = ExtResource("2_bemmk")
+length = 1.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_8wlai")
+texture = ExtResource("4_lbw1h")
+region_enabled = true
+region_rect = Rect2(7, 0, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_bxorf")
+
+[node name="line_path" parent="." instance=ExtResource("4_is101")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0lyhl")
+}

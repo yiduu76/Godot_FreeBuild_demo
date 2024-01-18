@@ -1,0 +1,21 @@
+[gd_scene load_steps=4 format=3 uid="uid://b4hei6f7hakxw"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Scripts/track_mouse_area.gd" id="1_n5pqm"]
+[ext_resource type="Texture2D" uid="uid://ci0fu21l5qpiq" path="res://PNG/mouse.png" id="2_0ovjo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8py0"]
+radius = 2.0
+
+[node name="mouse" type="Sprite2D"]
+texture_filter = 1
+position = Vector2(3, 3)
+texture = ExtResource("2_0ovjo")
+script = ExtResource("1_n5pqm")
+
+[node name="track_mouse_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="track_mouse_area"]
+shape = SubResource("CircleShape2D_k8py0")
+
+[connection signal="area_entered" from="track_mouse_area" to="." method="_on_track_mouse_area_area_entered"]
+[connection signal="area_exited" from="track_mouse_area" to="." method="_on_track_mouse_area_area_exited"]

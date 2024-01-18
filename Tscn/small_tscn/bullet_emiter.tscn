@@ -1,0 +1,85 @@
+[gd_scene load_steps=10 format=3 uid="uid://bfxe4wvjl7e6k"]
+
+[ext_resource type="Script" path="res://Tscn/small_tscn/scripts/bullet_emiter.gd" id="1_mx7qb"]
+[ext_resource type="PackedScene" uid="uid://b0ptm1bkfmito" path="res://Tscn/Bullets/O_2_bullet.tscn" id="2_n3pwc"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="2_r33dc"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="3_8belp"]
+[ext_resource type="AudioStream" uid="uid://bb550kenksihj" path="res://Assets/Sound_effect/shoot_se/shoot_1.MP3" id="3_tkc2t"]
+
+[sub_resource type="Animation" id="Animation_6ojrn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast2D/Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_ru2dn"]
+resource_name = "scale"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("RayCast2D/Sprite2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.8, 1.3), Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ya2ai"]
+_data = {
+"RESET": SubResource("Animation_6ojrn"),
+"scale": SubResource("Animation_ru2dn")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2p6rm"]
+resource_local_to_scene = true
+shader = ExtResource("3_8belp")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[node name="bullet_emiter" type="Node2D"]
+script = ExtResource("1_mx7qb")
+Free_mode = true
+spread_degrees = 3.0
+bullet = ExtResource("2_n3pwc")
+origin_bullet = ExtResource("2_n3pwc")
+
+[node name="shoot_pos" type="Marker2D" parent="."]
+position = Vector2(8, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_ya2ai")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_tkc2t")
+bus = &"SE_1"
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(50, 0)
+collision_mask = 5
+
+[node name="Marker2D" type="Marker2D" parent="RayCast2D"]
+position = Vector2(49, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="RayCast2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_2p6rm")
+texture = ExtResource("2_r33dc")
+offset = Vector2(4, 0)
+region_enabled = true
+region_rect = Rect2(64, 35, 9, 3)

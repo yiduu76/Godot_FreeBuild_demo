@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://cl5soawnickai"]
+
+[ext_resource type="Texture2D" uid="uid://ci0fu21l5qpiq" path="res://PNG/mouse.png" id="1_f10hh"]
+[ext_resource type="Script" path="res://Tscn/small_tscn/scripts/mouse.gd" id="2_32mnf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k8py0"]
+radius = 2.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_outce"]
+radius = 16.0
+
+[node name="Mouse" type="Sprite2D"]
+modulate = Color(1, 1, 1, 0.870588)
+texture_filter = 1
+position = Vector2(3, 3)
+texture = ExtResource("1_f10hh")
+script = ExtResource("2_32mnf")
+
+[node name="track_mouse_area" type="Area2D" parent="."]
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="track_mouse_area"]
+shape = SubResource("CircleShape2D_k8py0")
+
+[node name="Lock_target_area" type="Area2D" parent="."]
+position = Vector2(-3, -3)
+collision_mask = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Lock_target_area"]
+shape = SubResource("CircleShape2D_outce")
+
+[connection signal="area_entered" from="track_mouse_area" to="." method="_on_track_mouse_area_area_entered"]
+[connection signal="area_exited" from="track_mouse_area" to="." method="_on_track_mouse_area_area_exited"]
+[connection signal="body_entered" from="Lock_target_area" to="." method="_on_lock_target_area_body_entered"]
+[connection signal="body_exited" from="Lock_target_area" to="." method="_on_lock_target_area_body_exited"]

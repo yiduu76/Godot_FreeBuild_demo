@@ -1,0 +1,271 @@
+[gd_scene load_steps=3 format=3 uid="uid://f7nl2fo5wayu"]
+
+[ext_resource type="Script" path="res://Tscn/UI_scn/script/mob_tip.gd" id="1_xspln"]
+[ext_resource type="StyleBox" uid="uid://iwtr5dbdr6qp" path="res://Tres/ui_style.tres" id="2_brpbt"]
+
+[node name="Mob_tip" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 0
+offset_right = 80.0
+offset_bottom = 176.0
+mouse_filter = 2
+script = ExtResource("1_xspln")
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("2_brpbt")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LV_1" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = 3.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LV_2_top" type="Control" parent="LV_1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 5.0
+offset_bottom = -121.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Names" type="HBoxContainer" parent="LV_1/LV_2_top"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -25.0
+offset_top = -2.0
+offset_right = 25.0
+offset_bottom = 38.0
+grow_horizontal = 2
+
+[node name="Pre_name" type="Label" parent="LV_1/LV_2_top/Names"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Null"
+
+[node name="Material_Name" type="Label" parent="LV_1/LV_2_top/Names"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Null"
+
+[node name="Main_name" type="Label" parent="LV_1/LV_2_top/Names"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 8
+text = "Null"
+
+[node name="LV_2_left" type="Control" parent="LV_1"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 21.0
+offset_right = -46.0
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Nor_data" type="HBoxContainer" parent="LV_1/LV_2_left"]
+layout_mode = 1
+offset_right = 29.0
+offset_bottom = 116.0
+mouse_filter = 2
+
+[node name="1_names" type="VBoxContainer" parent="LV_1/LV_2_left/Nor_data"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Mass" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "质量
+"
+
+[node name="Health" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "耐久
+"
+
+[node name="Recover" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "自修复"
+
+[node name="Physics_additon" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "物理加成"
+
+[node name="Physics_resist" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "物理抵抗"
+
+[node name="Energy_additon" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "能量加成"
+
+[node name="Energy_resist" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "能量抵抗"
+
+[node name="Value" type="Label" parent="LV_1/LV_2_left/Nor_data/1_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "价值"
+
+[node name="nums" type="VBoxContainer" parent="LV_1/LV_2_left/Nor_data"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Mass" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0
+"
+
+[node name="Health" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="Recover" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="physics_additon" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="physics_resist" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="energy_additon" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="energy_resist" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="Value" type="Label" parent="LV_1/LV_2_left/Nor_data/nums"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="2_names" type="VBoxContainer" parent="LV_1/LV_2_left/Nor_data"]
+layout_mode = 2
+size_flags_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+alignment = 1
+
+[node name="ShootCd" type="Label" parent="LV_1/LV_2_left/Nor_data/2_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "冷却加成"
+
+[node name="OnceBulletNum" type="Label" parent="LV_1/LV_2_left/Nor_data/2_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "单发加成"
+
+[node name="Bullet_InitSpeed" type="Label" parent="LV_1/LV_2_left/Nor_data/2_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "初速加成"
+
+[node name="Bullet_Change" type="Label" parent="LV_1/LV_2_left/Nor_data/2_names"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "子弹更换"
+
+[node name="nums2" type="VBoxContainer" parent="LV_1/LV_2_left/Nor_data"]
+layout_mode = 2
+size_flags_horizontal = 0
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="ShootCd" type="Label" parent="LV_1/LV_2_left/Nor_data/nums2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0
+"
+
+[node name="OnceBulletNum" type="Label" parent="LV_1/LV_2_left/Nor_data/nums2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="Bullet_InitSpeed" type="Label" parent="LV_1/LV_2_left/Nor_data/nums2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "0"
+
+[node name="Bullet_Change" type="Label" parent="LV_1/LV_2_left/Nor_data/nums2"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 6
+text = "普通"

@@ -1,0 +1,71 @@
+[gd_scene load_steps=13 format=3 uid="uid://dcyxvi34uxeny"]
+
+[ext_resource type="Texture2D" uid="uid://db6f1606gg6ab" path="res://PNG/VFX/broken_parts_wood.png" id="1_6fkfo"]
+[ext_resource type="Shader" uid="uid://cksq7daxs111i" path="res://Tres/shader/animation_swap_color.tres" id="1_croty"]
+[ext_resource type="Texture2D" uid="uid://b15h0ou4v8y6t" path="res://PNG/Mobs/Colors/Wood/N.png" id="2_fp4ly"]
+[ext_resource type="Script" path="res://Tscn/Particles_tscn/die_particles_2d.gd" id="2_sks2e"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qgaml"]
+shader = ExtResource("1_croty")
+shader_parameter/particles_anim_h_frames = 4
+shader_parameter/particles_anim_v_frames = 1
+shader_parameter/particles_anim_loop = false
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+shader_parameter/palette_in = ExtResource("2_fp4ly")
+shader_parameter/palette_out = ExtResource("2_fp4ly")
+
+[sub_resource type="Gradient" id="Gradient_iopnw"]
+offsets = PackedFloat32Array(0, 0.137741, 0.818182, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_y8j76"]
+gradient = SubResource("Gradient_iopnw")
+
+[sub_resource type="Curve" id="Curve_mp14g"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.75601, 21.9365), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_f8cqr"]
+curve = SubResource("Curve_mp14g")
+
+[sub_resource type="Curve" id="Curve_co1ri"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.768029, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_6nbg5"]
+curve = SubResource("Curve_co1ri")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_0btg5"]
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 140.0
+initial_velocity_max = 140.0
+angular_velocity_min = -360.0
+angular_velocity_max = 360.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_min = 30.0
+damping_max = 70.0
+damping_curve = SubResource("CurveTexture_f8cqr")
+scale_curve = SubResource("CurveTexture_6nbg5")
+color_ramp = SubResource("GradientTexture1D_y8j76")
+anim_offset_max = 1.0
+
+[node name="broken_part" type="GPUParticles2D"]
+material = SubResource("ShaderMaterial_qgaml")
+amount = 9
+process_material = SubResource("ParticleProcessMaterial_0btg5")
+texture = ExtResource("1_6fkfo")
+lifetime = 0.4
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("2_sks2e")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

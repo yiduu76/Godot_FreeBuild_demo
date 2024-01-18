@@ -1,0 +1,343 @@
+[gd_scene load_steps=10 format=3 uid="uid://bnjh882d8cgg2"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Scripts/reward.gd" id="1_iw1ul"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="6_2jy3l"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="6_7fsoe"]
+[ext_resource type="Texture2D" uid="uid://b15h0ou4v8y6t" path="res://PNG/Mobs/Colors/Wood/N.png" id="7_fxqy5"]
+[ext_resource type="StyleBox" uid="uid://iwtr5dbdr6qp" path="res://Tres/ui_style.tres" id="7_hr83u"]
+[ext_resource type="PackedScene" uid="uid://f7nl2fo5wayu" path="res://Tscn/UI_scn/mob_tip.tscn" id="9_83ynn"]
+[ext_resource type="StyleBox" uid="uid://ci6pf38okvg7s" path="res://Tres/ui_hover_style.tres" id="13_bts15"]
+[ext_resource type="StyleBox" uid="uid://gggtwfrjx7yv" path="res://Tres/ui_press_style.tres" id="14_xwoll"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ai1mq"]
+resource_local_to_scene = true
+shader = ExtResource("6_2jy3l")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+shader_parameter/palette_in = ExtResource("7_fxqy5")
+
+[node name="Reward" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_iw1ul")
+
+[node name="Mob_tip" parent="." instance=ExtResource("9_83ynn")]
+offset_left = 73.0
+offset_right = 169.0
+
+[node name="mobs" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -248.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="under_background" type="Label" parent="mobs"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/normal = ExtResource("7_hr83u")
+
+[node name="GridContainer" type="GridContainer" parent="mobs"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_top = 8.0
+offset_right = 28.0
+offset_bottom = 104.0
+grow_horizontal = 2
+columns = 3
+
+[node name="mob_button_0" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_0"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_1" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_1"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_2" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_2"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_3" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_3"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_4" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_4"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_5" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_5"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_6" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_6"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_7" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_7"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_8" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_8"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_9" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_9"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_10" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_10"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_11" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_11"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_12" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_12"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_13" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_13"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="mob_button_14" type="Button" parent="mobs/GridContainer"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("14_xwoll")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Sprite2D" type="Sprite2D" parent="mobs/GridContainer/mob_button_14"]
+material = SubResource("ShaderMaterial_ai1mq")
+position = Vector2(8, 8)
+texture = ExtResource("6_7fsoe")
+region_enabled = true
+
+[node name="next_materail" type="Button" parent="mobs"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = 48.0
+offset_top = 128.0
+offset_right = 64.0
+offset_bottom = 144.0
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("13_bts15")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="pre_materail" type="Button" parent="mobs"]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 0
+offset_left = 8.0
+offset_top = 128.0
+offset_right = 24.0
+offset_bottom = 144.0
+theme_override_styles/normal = ExtResource("7_hr83u")
+theme_override_styles/hover = ExtResource("14_xwoll")
+theme_override_styles/pressed = ExtResource("13_bts15")
+theme_override_styles/disabled = ExtResource("7_hr83u")
+theme_override_styles/focus = ExtResource("7_hr83u")
+
+[node name="Tip" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -54.5
+offset_right = 54.5
+offset_bottom = 24.0
+grow_horizontal = 2
+text = "你没有足够的金钱"
+
+[connection signal="button_down" from="mobs/next_materail" to="." method="_on_next_materail_button_down"]

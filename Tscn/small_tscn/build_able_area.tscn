@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dsg34l6ecg3b"]
+
+[ext_resource type="Script" path="res://Tscn/small_tscn/scripts/build_able_area.gd" id="1_bgnhw"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="2_xbvxr"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_rp8i6"]
+radius = 3.0
+
+[node name="build_able_area" type="Area2D" groups=["build_able_area"]]
+script = ExtResource("1_bgnhw")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_rp8i6")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.392157)
+texture_filter = 1
+texture = ExtResource("2_xbvxr")
+region_enabled = true
+region_rect = Rect2(0, 16, 9, 9)

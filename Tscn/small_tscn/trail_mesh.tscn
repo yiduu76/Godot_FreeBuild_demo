@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8dxxn83xxxjm"]
+
+[ext_resource type="Script" path="res://Tscn/small_tscn/scripts/trail_mesh.gd" id="1_07t5p"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_sv24m"]
+resource_local_to_scene = true
+orientation = 2
+
+[node name="Trail_mesh" type="MeshInstance2D"]
+modulate = Color(1, 0.439216, 0.294118, 0.196078)
+mesh = SubResource("PlaneMesh_sv24m")
+script = ExtResource("1_07t5p")

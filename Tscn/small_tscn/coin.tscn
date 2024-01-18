@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://b0djh7fat3lp"]
+
+[ext_resource type="Script" path="res://Tscn/small_tscn/coin.gd" id="1_dp2yx"]
+[ext_resource type="Texture2D" uid="uid://cd81wb0ejq7c1" path="res://PNG/Mobs/Woods/N_all.png" id="2_slb0l"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="2_va441"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qevux"]
+shader = ExtResource("2_va441")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tdrwv"]
+radius = 3.0
+
+[node name="coin" type="RigidBody2D"]
+collision_layer = 0
+collision_mask = 0
+gravity_scale = 0.0
+max_contacts_reported = 1
+contact_monitor = true
+linear_damp = 3.0
+script = ExtResource("1_dp2yx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_qevux")
+texture = ExtResource("2_slb0l")
+region_enabled = true
+region_rect = Rect2(44, 0, 4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_tdrwv")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tdrwv")
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

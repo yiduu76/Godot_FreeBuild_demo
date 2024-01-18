@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://bsrfaq3da7o6l"]
+
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="1_76qu4"]
+[ext_resource type="Script" path="res://Tscn/Particles_tscn/die_particles_2d.gd" id="1_m83a8"]
+[ext_resource type="AudioStream" uid="uid://dbtop2a3vocxg" path="res://Assets/Sound_effect/shoot_se/impact_1.wav" id="2_l2iuy"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6ss0m"]
+shader = ExtResource("1_76qu4")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="Gradient" id="Gradient_e5e1s"]
+offsets = PackedFloat32Array(0, 0.0831683, 0.155211, 0.788732, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 0.705882, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_icsif"]
+gradient = SubResource("Gradient_e5e1s")
+
+[sub_resource type="Curve" id="Curve_rk8kr"]
+max_value = 100.0
+_data = [Vector2(0.000896059, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_snpy1"]
+curve = SubResource("Curve_rk8kr")
+
+[sub_resource type="Curve" id="Curve_rdjjc"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.494872, 0.503782), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_aa531"]
+curve = SubResource("Curve_rdjjc")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_flih1"]
+emission_shape = 1
+emission_sphere_radius = 1.0
+particle_flag_disable_z = true
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 100.0
+initial_velocity_max = 100.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+damping_max = 35.0
+damping_curve = SubResource("CurveTexture_snpy1")
+scale_curve = SubResource("CurveTexture_aa531")
+color_ramp = SubResource("GradientTexture1D_icsif")
+
+[node name="die_particles_2d" type="GPUParticles2D"]
+material = SubResource("ShaderMaterial_6ss0m")
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_flih1")
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+trail_enabled = true
+script = ExtResource("1_m83a8")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+autostart = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_l2iuy")
+pitch_scale = 1.4
+max_distance = 200.0
+bus = &"SE_1"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

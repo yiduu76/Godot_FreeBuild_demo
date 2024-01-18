@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://d2fquug5ci6uh"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Ey_8_add/script/Ey_Assembly.gd" id="1_t8kpu"]
+[ext_resource type="PackedScene" uid="uid://bbw8jrtovkg7d" path="res://Tscn/Enemy/Ey_8/Ey_Rect_8.tscn" id="3_65lg2"]
+[ext_resource type="PackedScene" uid="uid://crwdnke4xiyqp" path="res://Tscn/Enemy/Ey_8/Ey_Triangel_8.tscn" id="3_tih06"]
+
+[node name="Ey_RT" type="Node2D"]
+script = ExtResource("1_t8kpu")
+
+[node name="Ey_Triangel_8" parent="." instance=ExtResource("3_tih06")]
+
+[node name="Ey_Rect_8" parent="." instance=ExtResource("3_65lg2")]
+position = Vector2(5, 0)
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Triangel_8")

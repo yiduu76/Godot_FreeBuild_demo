@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=3 uid="uid://cinsd1sl4d2li"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Ey_8_add/script/Ey_Assembly.gd" id="1_m1t4i"]
+[ext_resource type="PackedScene" uid="uid://b737xsx6phgug" path="res://Tscn/Enemy/Ey_8/Ey_Circle_8.tscn" id="2_y5ell"]
+[ext_resource type="PackedScene" uid="uid://bbw8jrtovkg7d" path="res://Tscn/Enemy/Ey_8/Ey_Rect_8.tscn" id="3_noumh"]
+
+[node name="Ey_R4C" type="Node2D"]
+script = ExtResource("1_m1t4i")
+
+[node name="Ey_Circle_8" parent="." instance=ExtResource("2_y5ell")]
+
+[node name="Ey_Rect_8_1" parent="." instance=ExtResource("3_noumh")]
+position = Vector2(4, 0)
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")
+
+[node name="Ey_Rect_8_2" parent="." instance=ExtResource("3_noumh")]
+position = Vector2(-4, 0)
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")
+
+[node name="Ey_Rect_8_3" parent="." instance=ExtResource("3_noumh")]
+position = Vector2(0, 4)
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")
+
+[node name="Ey_Rect_8_4" parent="." instance=ExtResource("3_noumh")]
+position = Vector2(0, -4)
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")

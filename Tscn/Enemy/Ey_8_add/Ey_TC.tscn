@@ -1,0 +1,38 @@
+[gd_scene load_steps=4 format=3 uid="uid://i4jkhhrk1ime"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Ey_8_add/script/Ey_Assembly.gd" id="1_6wpyr"]
+[ext_resource type="PackedScene" uid="uid://b737xsx6phgug" path="res://Tscn/Enemy/Ey_8/Ey_Circle_8.tscn" id="2_o14qg"]
+[ext_resource type="PackedScene" uid="uid://crwdnke4xiyqp" path="res://Tscn/Enemy/Ey_8/Ey_Triangel_8.tscn" id="2_u8e7s"]
+
+[node name="Ey_TC" type="Node2D"]
+script = ExtResource("1_6wpyr")
+
+[node name="Ey_Circle_8" parent="." instance=ExtResource("2_o14qg")]
+
+[node name="Ey_Triangel_8" parent="." instance=ExtResource("2_u8e7s")]
+position = Vector2(4, 4)
+rotation = 0.785398
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")
+
+[node name="Ey_Triangel_9" parent="." instance=ExtResource("2_u8e7s")]
+position = Vector2(4, -4)
+rotation = -0.785398
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")
+
+[node name="Ey_Triangel_10" parent="." instance=ExtResource("2_u8e7s")]
+position = Vector2(-4, -4)
+rotation = -2.35619
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")
+
+[node name="Ey_Triangel_11" parent="." instance=ExtResource("2_u8e7s")]
+position = Vector2(-4, 4)
+rotation = 2.35619
+Have_engine = false
+Target_player = false
+path_to_father = NodePath("../Ey_Circle_8")

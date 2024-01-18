@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://2ygjydsp7bu"]
+
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="1_t5iai"]
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_t5iai")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1

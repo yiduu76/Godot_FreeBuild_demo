@@ -1,0 +1,295 @@
+[gd_scene load_steps=27 format=3 uid="uid://bret1i20la6cg"]
+
+[ext_resource type="Script" path="res://Tscn/wall.gd" id="1_3e46a"]
+[ext_resource type="Texture2D" uid="uid://clfiynuyu4woa" path="res://PNG/Tiles/tile_8x8.png" id="2_2cb5l"]
+[ext_resource type="Shader" path="res://Tres/shader/pattle_swap.gdshader" id="2_mea20"]
+
+[sub_resource type="Gradient" id="Gradient_a1qxm"]
+offsets = PackedFloat32Array(0, 0.140684, 0.494297, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xmsql"]
+gradient = SubResource("Gradient_a1qxm")
+
+[sub_resource type="Curve" id="Curve_dwh01"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.257911, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_jvkji"]
+curve = SubResource("Curve_dwh01")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_2jr86"]
+emission_shape = 1
+emission_sphere_radius = 4.0
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 35.0
+initial_velocity_max = 70.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+scale_min = 0.7
+scale_max = 1.4
+scale_curve = SubResource("CurveTexture_jvkji")
+color = Color(1, 0.713726, 0.54902, 1)
+color_ramp = SubResource("GradientTexture1D_xmsql")
+
+[sub_resource type="Gradient" id="Gradient_al4ew"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dsfjd"]
+gradient = SubResource("Gradient_al4ew")
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Gradient" id="Gradient_q5bvk"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_au51s"]
+gradient = SubResource("Gradient_q5bvk")
+width = 2048
+height = 2048
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.7, 0.7)
+
+[sub_resource type="Gradient" id="Gradient_4qcxf"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k78g2"]
+gradient = SubResource("Gradient_4qcxf")
+width = 1024
+height = 1024
+use_hdr = true
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.9, 0.9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_p7o8w"]
+radius = 8.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d7j6q"]
+shader = ExtResource("2_mea20")
+shader_parameter/num_colors = 4
+shader_parameter/precision = 0.1
+
+[sub_resource type="Animation" id="Animation_iwodl"]
+resource_name = "scale"
+length = 7.0
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D_1:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.95, 0.95), Vector2(1.1, 1.1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Line2D_1:modulate")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.27451), Color(1, 1, 1, 0.054902), Color(1, 1, 1, 0.54902)]
+}
+
+[sub_resource type="Animation" id="Animation_6bcwv"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D_1:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e82pw"]
+_data = {
+"RESET": SubResource("Animation_6bcwv"),
+"scale": SubResource("Animation_iwodl")
+}
+
+[sub_resource type="Animation" id="Animation_1vaex"]
+resource_name = "scale"
+length = 7.0
+loop_mode = 2
+step = 1.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("sun:energy")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 3, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.4, 1.0, 2.1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("sun:scale")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1.2, 1.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Light_Envir:energy")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.05, 0.04, 0.06]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Light_Envir:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3, 7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.9, 0.9), Vector2(1.2, 1.2)]
+}
+
+[sub_resource type="Animation" id="Animation_5a4i0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Light_Envir:energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a6vwl"]
+_data = {
+"RESET": SubResource("Animation_5a4i0"),
+"scale": SubResource("Animation_1vaex")
+}
+
+[sub_resource type="Gradient" id="Gradient_eul7s"]
+offsets = PackedFloat32Array(0, 0.403042, 0.817491, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.27451, 1, 1, 1, 0, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_8jcfx"]
+gradient = SubResource("Gradient_eul7s")
+
+[sub_resource type="CurveTexture" id="CurveTexture_unmf1"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_621m2"]
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 350.0
+emission_ring_radius = 350.0
+emission_ring_inner_radius = 320.0
+particle_flag_disable_z = true
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+radial_accel_min = -210.0
+radial_accel_max = -140.0
+scale_min = 0.8
+scale_max = 1.8
+scale_curve = SubResource("CurveTexture_unmf1")
+color = Color(0.900884, 0.900577, 0.836509, 1)
+color_ramp = SubResource("GradientTexture1D_8jcfx")
+
+[node name="wall" type="RigidBody2D"]
+collision_mask = 7
+mass = 100.0
+linear_damp = 1.0
+script = ExtResource("1_3e46a")
+length = 100
+
+[node name="sun_par" type="GPUParticles2D" parent="."]
+amount = 35
+process_material = SubResource("ParticleProcessMaterial_2jr86")
+
+[node name="Line2D_1" type="Line2D" parent="."]
+modulate = Color(1, 1, 1, 0.0823529)
+points = PackedVector2Array(0, 0)
+width = 1.0
+
+[node name="sun" type="PointLight2D" parent="."]
+color = Color(0.831373, 0.380392, 0.0627451, 1)
+energy = 1.4
+shadow_enabled = true
+shadow_filter = 1
+shadow_item_cull_mask = 15
+texture = SubResource("GradientTexture2D_dsfjd")
+
+[node name="Dark_Envir" type="PointLight2D" parent="."]
+blend_mode = 1
+texture = SubResource("GradientTexture2D_au51s")
+
+[node name="Light_Envir" type="PointLight2D" parent="."]
+energy = 0.05
+shadow_enabled = true
+shadow_color = Color(0, 0, 0, 1)
+shadow_filter = 2
+shadow_filter_smooth = 2.0
+texture = SubResource("GradientTexture2D_k78g2")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_p7o8w")
+
+[node name="sun_icon" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_d7j6q")
+texture = ExtResource("2_2cb5l")
+region_enabled = true
+region_rect = Rect2(101, 139, 23, 9)
+
+[node name="edge_breath" type="AnimationPlayer" parent="."]
+autoplay = "scale"
+libraries = {
+"": SubResource("AnimationLibrary_e82pw")
+}
+
+[node name="sun_breath" type="AnimationPlayer" parent="."]
+autoplay = "scale"
+libraries = {
+"": SubResource("AnimationLibrary_a6vwl")
+}
+
+[node name="edge_par" type="GPUParticles2D" parent="."]
+amount = 14
+process_material = SubResource("ParticleProcessMaterial_621m2")
+lifetime = 2.1
+visibility_rect = Rect2(-1000, -1000, 2000, 2000)
+local_coords = true
+trail_enabled = true
+trail_lifetime = 0.07
+trail_sections = 4
+trail_section_subdivisions = 2

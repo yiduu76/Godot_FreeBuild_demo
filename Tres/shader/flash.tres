@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://5lwjvbgjlx0p"]
+
+[ext_resource type="Shader" path="res://Tres/shader/flash_white.gdshader" id="1_apkdg"]
+
+[resource]
+shader = ExtResource("1_apkdg")
+shader_parameter/white_scale = 0.0

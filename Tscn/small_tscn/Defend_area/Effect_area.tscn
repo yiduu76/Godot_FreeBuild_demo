@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b2udd4i1y4s7w"]
+
+[ext_resource type="Script" path="res://Tscn/small_tscn/Defend_area/script/Effect_area.gd" id="1_5a06v"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_i6kuw"]
+resource_local_to_scene = true
+radius = 16.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1pwqp"]
+resource_local_to_scene = true
+
+[node name="Effect_area" type="Area2D"]
+collision_layer = 7
+collision_mask = 7
+script = ExtResource("1_5a06v")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_i6kuw")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="."]
+modulate = Color(0.564706, 1, 1, 0.027451)
+position = Vector2(0, 4.05312e-06)
+scale = Vector2(32.0363, 32)
+mesh = SubResource("SphereMesh_1pwqp")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

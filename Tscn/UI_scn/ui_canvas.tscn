@@ -1,0 +1,115 @@
+[gd_scene load_steps=6 format=3 uid="uid://bif423ahnijn8"]
+
+[ext_resource type="Script" path="res://Tscn/Enemy/Scripts/UI.gd" id="1_81hip"]
+[ext_resource type="StyleBox" uid="uid://iwtr5dbdr6qp" path="res://Tres/ui_style.tres" id="2_wayag"]
+[ext_resource type="PackedScene" uid="uid://bnjh882d8cgg2" path="res://Tscn/UI_scn/reward.tscn" id="3_fdnhy"]
+[ext_resource type="StyleBox" uid="uid://gggtwfrjx7yv" path="res://Tres/ui_press_style.tres" id="4_a0kro"]
+[ext_resource type="Texture2D" uid="uid://t0sml6xf8cpv" path="res://PNG/UI/UI.png" id="6_d6xbl"]
+
+[node name="UICanvas" type="CanvasLayer"]
+
+[node name="UI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_81hip")
+
+[node name="Ammon_bar" type="Line2D" parent="UI"]
+points = PackedVector2Array(4, 160, 4, 150)
+width = 4.0
+default_color = Color(0.658824, 0.988235, 1, 1)
+texture_mode = 1
+
+[node name="Reward" parent="UI" instance=ExtResource("3_fdnhy")]
+layout_mode = 1
+
+[node name="Shop" type="Button" parent="UI"]
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 11.0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+theme_override_styles/normal = ExtResource("2_wayag")
+theme_override_styles/hover = ExtResource("4_a0kro")
+theme_override_styles/pressed = ExtResource("2_wayag")
+theme_override_styles/focus = ExtResource("4_a0kro")
+text = "0"
+alignment = 2
+
+[node name="Fragment" type="Label" parent="UI/Shop"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -13.5
+offset_top = -4.5
+offset_right = -10.5
+offset_bottom = 4.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 5
+text = "F"
+vertical_alignment = 1
+
+[node name="wave_ui" type="Control" parent="UI"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -80.0
+offset_right = 80.0
+offset_bottom = 16.0
+grow_horizontal = 2
+
+[node name="Ey_spawn_bar" type="ProgressBar" parent="UI/wave_ui"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -59.5
+offset_right = 59.5
+offset_bottom = 10.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 2
+theme_override_styles/background = ExtResource("2_wayag")
+theme_override_styles/fill = ExtResource("4_a0kro")
+rounded = true
+show_percentage = false
+
+[node name="next_wave_button" type="Button" parent="UI/wave_ui"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -16.0
+offset_bottom = 10.0
+grow_horizontal = 0
+theme_override_font_sizes/font_size = 4
+theme_override_styles/normal = ExtResource("2_wayag")
+theme_override_styles/hover = ExtResource("4_a0kro")
+theme_override_styles/pressed = ExtResource("4_a0kro")
+theme_override_styles/focus = ExtResource("4_a0kro")
+
+[node name="Sprite2D" type="Sprite2D" parent="UI/wave_ui/next_wave_button"]
+position = Vector2(8, 4)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("6_d6xbl")
+region_enabled = true
+region_rect = Rect2(98, 2, 12, 11)
+
+[node name="Ammon_num" type="Label" parent="UI"]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_right = 72.0
+offset_bottom = 21.0
+text = "0"
+
+[connection signal="button_down" from="UI/Shop" to="UI" method="_on_shop_button_down"]
+[connection signal="button_down" from="UI/wave_ui/next_wave_button" to="UI" method="_on_next_wave_button_button_down"]
